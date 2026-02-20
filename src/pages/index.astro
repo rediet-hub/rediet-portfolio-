@@ -2,11 +2,15 @@
 import Base from '../layouts/Base.astro';
 import AirlineChart from '../components/AirlineChart.tsx';
 
-// Pull blog posts for the writing section
-const posts = await Astro.glob('./content/blog/*.mdx');
-const latestPosts = posts
-  .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
-  .slice(0, 3);
+let latestPosts: any[] = [];
+try {
+  const posts = await Astro.glob('./content/blog/*.mdx');
+  latestPosts = posts
+    .sort((a: any, b: any) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
+    .slice(0, 3);
+} catch (e) {
+  latestPosts = [];
+}
 ---
 
 <Base title="Your Name — Ethiopian & African Finance">
