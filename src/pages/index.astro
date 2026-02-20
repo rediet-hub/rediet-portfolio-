@@ -1,0 +1,425 @@
+---
+import Base from '../layouts/Base.astro';
+import AirlineChart from '../components/AirlineChart.tsx';
+
+// Pull blog posts for the writing section
+const posts = await Astro.glob('../content/blog/*.mdx');
+const latestPosts = posts
+  .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
+  .slice(0, 3);
+---
+
+<Base title="Your Name — Ethiopian & African Finance">
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════ -->
+  <section class="min-h-screen grid md:grid-cols-2 pt-20">
+
+    <!-- Left -->
+    <div class="flex flex-col justify-center px-8 md:px-12 py-20 relative z-10">
+      <div class="fade-up flex items-center gap-3 mb-6">
+        <span class="w-8 h-px bg-gold block"></span>
+        <span class="font-mono text-[0.7rem] text-gold tracking-widest uppercase">
+          Ethiopian & African Finance
+        </span>
+      </div>
+
+      <h1 class="fade-up delay-1 font-serif text-5xl md:text-7xl font-black leading-none mb-3 text-ink">
+        Your<br><em class="text-gold not-italic">Name</em>
+      </h1>
+
+      <p class="fade-up delay-2 font-serif text-lg font-normal italic text-stone
+                border-l-2 border-gold pl-4 mb-8 leading-relaxed max-w-sm">
+        Analyst, researcher, and writer on African capital markets and emerging market finance
+      </p>
+
+      <p class="fade-up delay-3 text-[#4a3f35] text-base leading-8 max-w-[42ch] mb-10">
+        I study how financial frameworks need to be rethought for the African context —
+        from valuing state-owned airlines in Addis Ababa to tracking the development of
+        Ethiopia's new securities exchange.
+      </p>
+
+      <div class="fade-up delay-4 flex flex-wrap gap-4">
+        <a href="#research" class="btn-primary">View Research</a>
+        <a href="#contact"  class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+
+    <!-- Right — dark panel -->
+    <div class="relative flex items-center justify-center overflow-hidden bg-forest min-h-[40vh] md:min-h-0">
+      <!-- diagonal grid texture -->
+      <div class="absolute inset-0 opacity-30"
+           style="background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(200,148,26,0.08) 40px, rgba(200,148,26,0.08) 41px);">
+      </div>
+
+      <!-- Stat card -->
+      <div class="fade-up delay-3 relative z-10 border border-gold/30 p-10 text-center max-w-xs
+                  bg-white/5 backdrop-blur-sm">
+        <div class="font-serif text-6xl font-black text-gold-light leading-none mb-2">58%</div>
+        <div class="font-mono text-[0.65rem] text-warm-white/50 tracking-widest uppercase leading-5">
+          of Sub-Saharan Africa's<br/>passenger traffic
+        </div>
+        <div class="w-8 h-px bg-gold mx-auto my-5"></div>
+        <div class="font-serif text-3xl font-black text-gold-light leading-none mb-2">ET</div>
+        <div class="font-mono text-[0.65rem] text-warm-white/50 tracking-widest uppercase leading-5">
+          Ethiopian Airlines —<br/>subject of my honors thesis
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       RESEARCH
+  ════════════════════════════════════════════ -->
+  <section id="research" class="bg-cream px-8 md:px-12 py-24">
+    <div class="flex items-baseline gap-4 mb-14">
+      <span class="section-tag">01</span>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-ink">Research</h2>
+      <div class="flex-1 h-px bg-mist"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-0.5">
+
+      <!-- Featured -->
+      <div class="md:col-span-2 bg-forest p-8 md:p-10 grid md:grid-cols-2 gap-8 group relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-0.5 h-0 bg-gold-light transition-all duration-300 group-hover:h-full"></div>
+        <div>
+          <div class="font-mono text-[0.65rem] text-gold tracking-widest uppercase mb-4">
+            Honors Thesis · 2025
+          </div>
+          <h3 class="font-serif text-2xl md:text-3xl font-bold text-warm-white leading-tight mb-4">
+            Valuing Ethiopian Airlines: A DCF Analysis in an Emerging Market Context
+          </h3>
+          <p class="text-warm-white/60 text-sm leading-7 mb-6">
+            A comprehensive financial model applying discounted cash flow valuation to sub-Saharan
+            Africa's largest carrier. Accounts for country risk premiums, ETB/USD volatility, and
+            the dual mandate of state-owned enterprises — adapting frameworks from mature economies
+            to Ethiopia's unique context.
+          </p>
+          <a href="#" class="font-mono text-xs text-gold-light tracking-widest uppercase
+                             no-underline hover:gap-3 transition-all
+                             inline-flex items-center gap-2 group/link">
+            Read the paper
+            <span class="transition-transform duration-200 group-hover/link:translate-x-1">→</span>
+          </a>
+        </div>
+        <div class="flex flex-col justify-end gap-4">
+          {[
+            { label: 'Methodology', value: 'DCF · WACC · CAPM · Scenario Analysis' },
+            { label: 'Key Focus',   value: 'Country Risk Premium · Currency Volatility' },
+            { label: 'Context',     value: 'Ethiopian SOE · African Aviation · ESX' },
+          ].map(m => (
+            <div class="border-t border-warm-white/10 pt-4">
+              <div class="font-mono text-[0.6rem] text-warm-white/30 tracking-widest uppercase mb-1">
+                {m.label}
+              </div>
+              <div class="text-gold-light text-sm font-medium">{m.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Lit Review -->
+      <div class="bg-warm-white p-8 group relative overflow-hidden card-hover">
+        <div class="absolute top-0 left-0 w-0.5 h-0 bg-gold transition-all duration-300 group-hover:h-full"></div>
+        <div class="font-mono text-[0.65rem] text-gold tracking-widest uppercase mb-4">
+          Literature Review · 2025
+        </div>
+        <h3 class="font-serif text-xl font-bold text-ink leading-tight mb-3">
+          Financial Valuation in African Emerging Markets: A Review
+        </h3>
+        <p class="text-stone text-sm leading-7 mb-6">
+          Examining gaps in applying standard valuation frameworks to sub-Saharan African firms,
+          with emphasis on state-owned enterprises and capital-intensive industries.
+        </p>
+        <a href="#" class="font-mono text-xs text-ink tracking-widest uppercase no-underline
+                           inline-flex items-center gap-2 group/link">
+          Read more
+          <span class="transition-transform duration-200 group-hover/link:translate-x-1">→</span>
+        </a>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="bg-mist p-8 flex flex-col items-center justify-center text-center min-h-[200px]">
+        <div class="font-mono text-[0.65rem] text-stone tracking-widest uppercase mb-3">
+          Coming Soon
+        </div>
+        <p class="font-serif text-stone text-base italic">Your next research project</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       WRITING
+  ════════════════════════════════════════════ -->
+  <section id="writing" class="bg-warm-white px-8 md:px-12 py-24">
+    <div class="flex items-baseline gap-4 mb-14">
+      <span class="section-tag">02</span>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-ink">Writing</h2>
+      <div class="flex-1 h-px bg-mist"></div>
+      <a href="/blog" class="font-mono text-[0.65rem] text-stone tracking-widest uppercase
+                             no-underline hover:text-ink transition-colors">
+        All posts →
+      </a>
+    </div>
+
+    {latestPosts.length > 0 ? (
+      <div class="grid md:grid-cols-3 gap-10">
+        {latestPosts.map(post => (
+          <article class="border-t-2 border-mist pt-5">
+            <div class="font-mono text-[0.65rem] text-stone tracking-widest uppercase mb-3">
+              {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+                month: 'long', year: 'numeric'
+              })}
+            </div>
+            <h3 class="font-serif text-lg font-bold text-ink leading-tight mb-3">
+              <a href={post.url} class="no-underline hover:text-gold transition-colors">
+                {post.frontmatter.title}
+              </a>
+            </h3>
+            <p class="text-stone text-sm leading-7 mb-4">{post.frontmatter.description}</p>
+            <span class="font-mono text-[0.6rem] tracking-widest uppercase
+                         bg-mist text-stone px-2 py-1">
+              {post.frontmatter.tag}
+            </span>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="grid md:grid-cols-3 gap-10">
+        {[
+          {
+            title: "What Ethiopia's New Securities Exchange Means for African Capital Markets",
+            desc: "The Ethiopian Securities Exchange launched in 2024, becoming one of the continent's newest capital markets. Here's what it signals about Ethiopia's economic trajectory.",
+            tag: 'Capital Markets',
+          },
+          {
+            title: 'Why African Airlines Keep Struggling — Except for Ethiopian',
+            desc: 'Kenya Airways lost money for seven years. South African Airways collapsed. So why has Ethiopian Airlines consistently turned a profit? A look at management and strategy.',
+            tag: 'Aviation',
+          },
+          {
+            title: "The Birr's Long Decline and What It Means for Ethiopian Business",
+            desc: "Ethiopia's managed exchange rate regime has kept the Birr artificially stable. As currency reforms continue, what does depreciation mean for dollar-exposed firms?",
+            tag: 'Macroeconomics',
+          },
+        ].map(p => (
+          <article class="border-t-2 border-mist pt-5">
+            <div class="font-mono text-[0.65rem] text-stone tracking-widest uppercase mb-3">
+              Coming Soon
+            </div>
+            <h3 class="font-serif text-lg font-bold text-ink leading-tight mb-3">{p.title}</h3>
+            <p class="text-stone text-sm leading-7 mb-4">{p.desc}</p>
+            <span class="font-mono text-[0.6rem] tracking-widest uppercase
+                         bg-mist text-stone px-2 py-1">{p.tag}</span>
+          </article>
+        ))}
+      </div>
+    )}
+
+    <div class="mt-14 text-center border border-dashed border-mist p-10">
+      <p class="font-serif italic text-stone text-lg mb-5">
+        "Writing is how I think through what the numbers are telling us."
+      </p>
+      <a href="#contact" class="btn-outline">Get notified when I publish</a>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       DATA VIZ
+  ════════════════════════════════════════════ -->
+  <section id="data" class="bg-ink px-8 md:px-12 py-24">
+    <div class="flex items-baseline gap-4 mb-14">
+      <span class="font-mono text-xs text-gold tracking-widest uppercase">03</span>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-warm-white">Data</h2>
+      <div class="flex-1 h-px bg-warm-white/10"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-0.5">
+
+      <!-- React chart component (island) -->
+      <div class="md:col-span-2 bg-white/[0.04] border border-warm-white/[0.07] p-8">
+        <div class="font-mono text-[0.65rem] text-gold tracking-widest uppercase mb-6">
+          Sub-Saharan African Airline Market Share (Passenger Traffic)
+        </div>
+        <AirlineChart client:load />
+        <p class="mt-5 text-[0.7rem] text-warm-white/25 italic">
+          Source: Ethiopian Airlines Annual Report. Replace with your actual data.
+        </p>
+      </div>
+
+      <!-- Stat blocks -->
+      <div class="flex flex-col gap-0.5">
+        {[
+          { num: 'ETB 1.63B', label: 'Ethiopian Airlines Net Profit'         },
+          { num: '24–50%',    label: 'Fuel as % of Airline Operating Expenses'},
+          { num: '2024',      label: 'Ethiopian Securities Exchange Launch'   },
+          { num: '↑ Rec.',    label: 'Passenger Load Factors, 2024–25'        },
+        ].map(s => (
+          <div class="bg-white/[0.04] border border-warm-white/[0.07] p-6 flex-1
+                      flex flex-col justify-center">
+            <div class="font-serif text-2xl md:text-3xl font-black text-gold-light leading-none mb-2">
+              {s.num}
+            </div>
+            <div class="font-mono text-[0.6rem] text-warm-white/35 tracking-widest uppercase leading-5">
+              {s.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <p class="mt-8 text-center text-[0.75rem] text-warm-white/25 italic">
+      Interactive visualizations are live React components — swap in your real data to bring them to life.
+    </p>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT
+  ════════════════════════════════════════════ -->
+  <section id="about" class="bg-cream">
+    <div class="grid md:grid-cols-2 gap-0">
+
+      <div class="px-8 md:px-12 py-24">
+        <div class="flex items-baseline gap-4 mb-10">
+          <span class="section-tag">04</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-ink">About</h2>
+        </div>
+        <p class="font-serif text-xl md:text-2xl font-normal leading-relaxed text-ink mb-6">
+          I'm a finance student focused on
+          <em class="text-earth not-italic font-semibold">emerging markets and African economic development.</em>
+        </p>
+        <p class="text-[#4a3f35] text-[0.95rem] leading-8 mb-5">
+          My honors thesis applies DCF valuation to Ethiopian Airlines — one of Africa's most
+          interesting financial stories. I'm drawn to questions about how standard financial
+          frameworks need to be adapted when assumptions about market liquidity, currency
+          stability, and institutional quality don't hold.
+        </p>
+        <p class="text-[#4a3f35] text-[0.95rem] leading-8 mb-8">
+          Beyond the models, I care about what the numbers mean for people — investors,
+          policymakers, and citizens of a continent whose capital markets are still being built.
+        </p>
+        <a href="/cv.pdf" class="font-medium text-sm text-ink no-underline
+                                 border-b-2 border-gold pb-0.5 inline-flex items-center gap-2
+                                 hover:text-gold transition-colors">
+          Download CV →
+        </a>
+      </div>
+
+      <div class="px-8 md:px-12 py-24 border-l border-mist">
+        <h3 class="font-serif text-xl font-bold text-ink mb-8">Skills & Tools</h3>
+        <div class="divide-y divide-mist">
+          {[
+            { name: 'Financial Modeling', tags: ['DCF', 'WACC', 'CAPM']         },
+            { name: 'Data Analysis',      tags: ['Excel', 'Python', 'R']         },
+            { name: 'Data Visualization', tags: ['D3.js', 'Recharts']            },
+            { name: 'Development',        tags: ['React', 'Next.js', 'Astro']    },
+            { name: 'Research',           tags: ['Emerging Markets', 'SOEs']     },
+            { name: 'Writing',            tags: ['Academic', 'Policy', 'Public'] },
+          ].map(s => (
+            <div class="flex justify-between items-center py-4">
+              <span class="text-ink font-medium text-sm">{s.name}</span>
+              <div class="flex gap-2 flex-wrap justify-end">
+                {s.tags.map(t => (
+                  <span class="font-mono text-[0.58rem] tracking-widest uppercase
+                               bg-mist text-stone px-2 py-0.5">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════════════ -->
+  <section id="contact" class="bg-warm-white">
+    <div class="grid md:grid-cols-2">
+
+      <div class="px-8 md:px-12 py-24">
+        <div class="flex items-baseline gap-4 mb-10">
+          <span class="section-tag">05</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-ink">Contact</h2>
+        </div>
+        <p class="font-serif text-2xl md:text-4xl font-bold leading-tight mb-5">
+          Let's talk about <em class="text-gold not-italic">Africa,</em>
+          <br/>finance, and what the data says.
+        </p>
+        <p class="text-stone text-base leading-8 mb-10 max-w-[38ch]">
+          Whether you're a researcher, journalist, investor, or just curious —
+          I'm always happy to connect about Ethiopian and African economic topics.
+        </p>
+        <div class="flex flex-col divide-y divide-mist">
+          {[
+            { label: 'Email',     href: 'mailto:your@email.com',              text: 'your@email.com'          },
+            { label: 'LinkedIn',  href: 'https://linkedin.com/in/yourhandle', text: 'linkedin.com/in/yourhandle'},
+            { label: 'X/Twitter', href: 'https://x.com/yourhandle',           text: '@yourhandle'             },
+            { label: 'SSRN',      href: 'https://ssrn.com',                   text: 'Research profile'        },
+          ].map(l => (
+            <a href={l.href} target="_blank"
+               class="flex items-center gap-6 py-4 no-underline text-ink
+                      hover:text-gold transition-colors group">
+              <span class="font-mono text-[0.6rem] tracking-widest uppercase text-stone w-20 flex-shrink-0
+                           group-hover:text-gold transition-colors">
+                {l.label}
+              </span>
+              <span class="text-sm">{l.text}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="px-8 md:px-12 py-24 bg-cream border-l border-mist">
+        <form class="flex flex-col gap-5"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST">
+          {[
+            { label: 'Name',    name: 'name',    type: 'text',  placeholder: 'Your name'       },
+            { label: 'Email',   name: 'email',   type: 'email', placeholder: 'your@email.com'  },
+          ].map(f => (
+            <div class="flex flex-col gap-2">
+              <label class="font-mono text-[0.65rem] tracking-widest uppercase text-stone">
+                {f.label}
+              </label>
+              <input
+                type={f.type} name={f.name} placeholder={f.placeholder} required
+                class="bg-warm-white border border-mist px-4 py-3 font-sans text-sm text-ink
+                       outline-none focus:border-gold transition-colors"
+              />
+            </div>
+          ))}
+          <div class="flex flex-col gap-2">
+            <label class="font-mono text-[0.65rem] tracking-widest uppercase text-stone">
+              Message
+            </label>
+            <textarea name="message" rows="5" placeholder="What's on your mind?" required
+                      class="bg-warm-white border border-mist px-4 py-3 font-sans text-sm text-ink
+                             outline-none focus:border-gold transition-colors resize-y">
+            </textarea>
+          </div>
+          <button type="submit" class="btn-primary text-center">Send Message</button>
+          <p class="text-[0.7rem] text-stone font-mono">
+            Powered by Formspree — free for up to 50 submissions/month.
+            <a href="https://formspree.io" target="_blank" class="text-gold no-underline hover:underline">
+              Sign up free →
+            </a>
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</Base>

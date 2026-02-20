@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+
+const posts = await Astro.glob('../content/blog/*.mdx');
+const sorted = posts.sort(
+  (a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()
+);
+---
+
+<Base title="Writing — YN Portfolio" description="Articles on Ethiopian and African finance, capital markets, and economic development.">
+
+  <!-- Header -->
+  <div class="bg-forest pt-32 pb-16 px-8 md:px-12">
+    <div class="max-w-4xl">
+      <span class="font-mono text-[0.7rem] text-gold tracking-widest uppercase mb-4 block">Writing</span>
+      <h1 class="font-serif text-4xl md:text-6xl font-black text-warm-white leading-none mb-4">
+        Articles & Analysis
+      </h1>
+      <p class="text-warm-white/50 text-lg max-w-xl leading-relaxed">
+        Short-form writing on Ethiopian and African finance, capital markets, aviation, and macroeconomics.
+      </p>
+    </div>
+  </div>
+
+  <!-- Post list -->
+  <main class="px-8 md:px-12 py-16 max-w-5xl">
+    {sorted.length === 0 ? (
+      <div class="text-center py-24">
+        <p class="font-serif italic text-stone text-xl mb-2">No articles yet.</p>
+        <p class="text-stone text-sm">Your first post lives at <code class="bg-mist px-2 py-0.5 text-xs">src/content/blog/</code></p>
+      </div>
+    ) : (
+      <div class="divide-y divide-mist">
+        {sorted.map(post => (
+          <article class="py-10 grid md:grid-cols-[1fr_auto] gap-6 items-start group">
+            <div>
+              <div class="flex items-center gap-4 mb-3">
+                <span class="font-mono text-[0.6rem] tracking-widest uppercase bg-mist text-stone px-2 py-0.5">
+                  {post.frontmatter.tag}
+                </span>
+                <span class="font-mono text-[0.6rem] tracking-widest uppercase text-stone">
+                  {new Date(post.frontmatter.pubDate).toLocaleDateString('en-US', {
+                    month: 'long', day: 'numeric', year: 'numeric'
+                  })}
+                </span>
+              </div>
+              <h2 class="font-serif text-2xl font-bold text-ink leading-tight mb-3">
+                <a href={post.url} class="no-underline hover:text-gold transition-colors">
+                  {post.frontmatter.title}
+                </a>
+              </h2>
+              <p class="text-stone text-sm leading-7 max-w-2xl">{post.frontmatter.description}</p>
+            </div>
+            <a href={post.url}
+               class="font-mono text-xs text-stone tracking-widest uppercase no-underline
+                      hover:text-ink transition-colors whitespace-nowrap mt-1
+                      inline-flex items-center gap-2 group-hover:text-ink">
+              Read
+              <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    )}
+  </main>
+
+</Base>
