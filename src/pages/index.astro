@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import AirlineChart from '../components/AirlineChart.tsx';
 
 // Pull blog posts for the writing section
-const posts = await Astro.glob('../content/blog/*.mdx');
+const posts = await Astro.glob('./content/blog/*.mdx');
 const latestPosts = posts
   .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
   .slice(0, 3);
